@@ -1,0 +1,104 @@
+// Pin definitions
+#define BUTTON_TOP2 2
+#define BUTTON_TOP 3
+#define BUTTON_PIN3 4
+#define BUTTON_PIN4 5
+#define BUTTON_PIN5 6
+#define BUTTON_PIN6 7
+#define BUTTON_PIN7 8
+#define BUTTON_PIN8 9
+// ---------------------------------
+
+#include "Keyboard.h"
+
+
+
+const uint8_t ledPin = 17;
+
+void setup() {
+  // Safety check. Ground pin #1 (RX) to cancel keyboard inputs.
+  pinMode(1, INPUT_PULLUP);
+  if (!digitalRead(1)) {
+    failsafe();
+  }
+
+
+
+  pinMode(2, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
+  pinMode(4, INPUT_PULLUP);
+  pinMode(5, INPUT_PULLUP);
+  pinMode(6, INPUT_PULLUP);
+  pinMode(7, INPUT_PULLUP);
+  pinMode(8, INPUT_PULLUP);
+  pinMode(9, INPUT_PULLUP);
+}
+
+
+void loop() {
+  String key = "";
+
+  //determine which key pressed and setup the "key" value
+  if (!digitalRead(2)) {
+    key = "top2";
+    Keyboard.press(KEY_F22);
+  }
+  else if (!digitalRead(3)) {
+    key = "bott2";
+    Keyboard.press(KEY_F20);
+  }
+  else if (!digitalRead(5)) {
+    key = "bott1";
+    Keyboard.press(KEY_F24);
+  }
+  else if (!digitalRead(6)) {
+    key = "top3";
+    Keyboard.press(KEY_F22);
+  }
+  else if (!digitalRead(7)) {
+    key = "bott3";
+    Keyboard.press(KEY_F21);
+  }
+  else if (!digitalRead(8)) {
+    key = "bott4";
+    typeString("Check out the Official Speedy Youtube Channel:");
+    Keyboard.press(KEY_LEFT_SHIFT);
+    Keyboard.press(KEY_RETURN);
+    Keyboard.release(KEY_LEFT_SHIFT);
+    Keyboard.release(KEY_RETURN);
+    typeString("https://www.youtube.com/c/speedy7");
+    Keyboard.press(KEY_RETURN);  
+  }
+  else if (!digitalRead(4)) {
+    key = "top1";
+    Keyboard.press(KEY_F23);
+  }
+  else if (!digitalRead(9)) {
+    key = "top4";
+    typeString("Join the Official Speedy Community Server:");
+    Keyboard.press(KEY_LEFT_SHIFT);
+    Keyboard.press(KEY_RETURN);
+    Keyboard.release(KEY_LEFT_SHIFT);
+    Keyboard.release(KEY_RETURN);
+    typeString("https://discord.gg/2X2cHnKYvd");
+    Keyboard.press(KEY_RETURN);
+  }
+  //Serial.print(key);
+
+  if (key == "")
+  {
+    Keyboard.releaseAll();
+  }
+}
+void typeString(String input) {
+  for (int i = 0; i < input.length(); i++) {
+    Keyboard.press(input.charAt(i));
+    Keyboard.release(input.charAt(i));
+  }
+  delay(500);
+}
+
+
+void failsafe() {
+  for (;;) {}
+}
