@@ -41,7 +41,7 @@ void loop() {
   //determine which key pressed and setup the "key" value
   if (!digitalRead(2)) {
     key = "top2";
-    Keyboard.press(KEY_F22);
+    Keyboard.press(KEY_F19);
   }
   else if (!digitalRead(3)) {
     key = "bott2";
@@ -49,7 +49,10 @@ void loop() {
   }
   else if (!digitalRead(5)) {
     key = "bott1";
-    Keyboard.press(KEY_F24);
+    Keyboard.press(LEFT_CTRL);
+    Keyboard.press(KEY_LEFT_ARROW);
+    //Keyboard.press(KEY_LEFT_SHIFT);
+    //Keyboard.press('p');
   }
   else if (!digitalRead(6)) {
     key = "top3";
@@ -57,7 +60,10 @@ void loop() {
   }
   else if (!digitalRead(7)) {
     key = "bott3";
-    Keyboard.press(KEY_F21);
+    Keyboard.press(LEFT_CTRL);
+    Keyboard.press(KEY_RIGHT_ARROW);
+   // Keyboard.press(KEY_LEFT_SHIFT);
+    //Keyboard.press('n');
   }
   else if (!digitalRead(8)) {
     key = "bott4";
@@ -75,7 +81,7 @@ void loop() {
   }
   else if (!digitalRead(9)) {
     key = "top4";
-    typeString("Join the Official Speedy Community Server:");
+    typeString("Join the Official Speedy Community Discord Server:");
     Keyboard.press(KEY_LEFT_SHIFT);
     Keyboard.press(KEY_RETURN);
     Keyboard.release(KEY_LEFT_SHIFT);
